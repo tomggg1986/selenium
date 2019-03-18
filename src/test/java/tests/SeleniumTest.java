@@ -26,11 +26,12 @@ public class SeleniumTest {
     public static final String EMAIL = "jank@wp.pl";
     public static final String ADDRESS = "Dzika 12";
     public static final String PAYMENT_METHOD = "debit";
+    public static final String BOOTSTRAP_PAGE = "http://tomaszgolebiowski.co.nf/bootstrap/index.html";
 
     @BeforeAll
     public void startBrowser() {
-        EnvironmentManager.initChromeWebDriver();
-//        EnvironmentManager.initFileFoxWebDriver();
+//        EnvironmentManager.initChromeWebDriver();
+        EnvironmentManager.initFileFoxWebDriver();
 //        EnvironmentManager.initEdgeWebDriver();
 //        EnvironmentManager.initInternetExplorerWebDriver();
     }
@@ -38,13 +39,13 @@ public class SeleniumTest {
     @Test
     public void testIfPageLoadSuccessful() {
         WebDriver driver = RunEnvironment.getWebDriver();
-        driver.get("file:///C:/Users/golebiowskit/Downloads/bootstrap-4.0.0/docs/4.0/examples/checkout/index.html");
+        driver.get(BOOTSTRAP_PAGE);
         String homeUrl = driver.getCurrentUrl();
-        assertEquals(homeUrl, "file:///C:/Users/golebiowskit/Downloads/bootstrap-4.0.0/docs/4.0/examples/checkout/index.html");
+        assertEquals(homeUrl, BOOTSTRAP_PAGE);
     }
 
     @Test
-    public void fillFormImputs() throws InterruptedException {
+    public void fillFormInputs() throws InterruptedException {
         WebDriver driver = RunEnvironment.getWebDriver();
         driver.findElement(By.id("firstName")).sendKeys(NAME);
         driver.findElement(By.id("lastName")).sendKeys(LAST_NAME);

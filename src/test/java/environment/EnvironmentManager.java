@@ -12,7 +12,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 public class EnvironmentManager {
 
     public static void initChromeWebDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\golebiowskit\\IdeaProjects\\academy_selenium\\src\\main\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", getDriverPath("chromedriver.exe"));
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--headless");
         options.addArguments("--mute-audio");
@@ -22,7 +22,7 @@ public class EnvironmentManager {
     }
 
     public static void initFileFoxWebDriver() {
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\golebiowskit\\IdeaProjects\\academy_selenium\\src\\main\\resources\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\geckodriver.exe");
         FirefoxOptions options = new FirefoxOptions();
         WebDriver driver = new FirefoxDriver(options);
 
@@ -30,15 +30,15 @@ public class EnvironmentManager {
     }
 
     public static void initEdgeWebDriver() {
-        System.setProperty("webdriver.edge.driver", "C:\\Users\\golebiowskit\\IdeaProjects\\academy_selenium\\src\\main\\resources\\MicrosoftWebDriver.exe");
+        System.setProperty("webdriver.edge.driver", "src\\main\\resources\\MicrosoftWebDriver.exe");
         WebDriver driver = new EdgeDriver();
 
         RunEnvironment.setWebDriver(driver);
     }
 
     public static void initInternetExplorerWebDriver() {
-        System.setProperty("webdriver.ie.driver", "C:\\Users\\golebiowskit\\IdeaProjects\\academy_selenium\\src\\main\\resources\\IEDriverServer.exe");
-        InternetExplorerOptions options =  new InternetExplorerOptions();
+        System.setProperty("webdriver.ie.driver", "src\\main\\resources\\IEDriverServer.exe");
+        InternetExplorerOptions options = new InternetExplorerOptions();
         options.ignoreZoomSettings();
         options.withInitialBrowserUrl("");
         WebDriver driver = new InternetExplorerDriver(options);
@@ -48,6 +48,10 @@ public class EnvironmentManager {
 
     public static void shutDownDriver() {
         RunEnvironment.getWebDriver().quit();
+    }
+
+    private static String getDriverPath(String driverName) {
+        return EnvironmentManager.class.getClassLoader().getResource(driverName).getFile().toString();
     }
 
 
