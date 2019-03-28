@@ -3,15 +3,20 @@ package SeleniumReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 
 public class SeleniumReader {
 
-    static final ClassLoader loader = SeleniumReader.class.getClassLoader();
+    private static final ClassLoader loader = SeleniumReader.class.getClassLoader();
     private String chromeDriverPath;
     private WebDriver driver;
 
@@ -70,5 +75,14 @@ public class SeleniumReader {
 
     public String getTextFormElement(String id) {
         return driver.findElement(By.id(id)).getText();
+    }
+
+    public Optional<WebElement> waitForElement(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        return  Optional.ofNullable(wait.until(ExpectedConditions.visibilityOf(element)));
+    }
+
+    public void setWatiTimeinSeconds(long time){
+        driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 }

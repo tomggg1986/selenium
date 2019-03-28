@@ -50,9 +50,12 @@ public class EnvironmentManager {
         RunEnvironment.getWebDriver().quit();
     }
 
-    private static String getDriverPath(String driverName) {
-        return EnvironmentManager.class.getClassLoader().getResource(driverName).getFile().toString();
+    public static void closeCurrentWindow() {
+        RunEnvironment.getWebDriver().close();
     }
 
+    private static String getDriverPath(String driverName) {
+        return EnvironmentManager.class.getClassLoader().getResource(driverName).getFile();
+    }
 
 }
