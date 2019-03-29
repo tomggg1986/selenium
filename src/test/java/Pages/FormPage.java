@@ -17,10 +17,10 @@ public class FormPage {
 
     public FormPage() {
         driver = RunEnvironment.getWebDriver();
+        driver.get(BOOTSTRAP_PAGE);
     }
 
     public FormPage setPersonalData(String name, String lastName, String userNamem, String email) {
-        driver.get(BOOTSTRAP_PAGE);
         driver.findElement(By.id("firstName")).sendKeys(name);
         driver.findElement(By.id("lastName")).sendKeys(lastName);
         driver.findElement(By.id("username")).sendKeys(userNamem);
@@ -46,8 +46,10 @@ public class FormPage {
     public FormPage setPayment(String paymentMethod) {
         // select payment method form radio button in firefox
         WebElement payment = driver.findElement(By.id(paymentMethod));
+
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", payment);
         Actions act1 = new Actions(driver);
+
         act1.moveToElement(driver.findElement(By.id(paymentMethod)))
                 .click()
                 .build()

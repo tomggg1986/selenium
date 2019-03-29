@@ -5,8 +5,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,6 +40,13 @@ public class SimpleTest {
         driver.findElement(By.id("email")).sendKeys("janK@wp.pl");
         driver.findElement(By.className("btn-primary")).click();
 
+        WebElement selectElement = driver.findElement(By.id("country"));
+        Select drpCountry = new Select(selectElement);
+        drpCountry.selectByVisibleText("United States");
+
+        Select drpState = new Select(driver.findElement(By.id("state")));
+        drpState.selectByVisibleText("California");
+
         String nameValue = driver.findElement(By.xpath(XPATH_3)).getAttribute("value");
         assertEquals("Jan" + " " + "Kowalski", nameValue);
     }
@@ -45,7 +54,7 @@ public class SimpleTest {
 
     @AfterAll
     static void closeDriver(){
-        driver.quit();
+        //driver.quit();
     }
 
 }

@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class SeleniumTest {
+public class FromPageTest {
 
     private static final String NAME = "Jan";
     private static final String LAST_NAME = "Kowalski";
